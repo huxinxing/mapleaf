@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="com.ml.xx.dao.SystemDao">
+   <select id="loadHeaderMean" resultType="com.ml.xx.bean.ManageSysBean">
+   		select * from ManageSys where f_id = '0'
+   </select>
+   
+   <select id="loadMenuTree" resultType="com.ml.xx.bean.ManageSysBean">
+   		select * from ManageSys
+   </select>
+   
+   <select id="pzurl" resultType="com.ml.xx.bean.ManageSysBean">
+   		select dh,text,url,urlType from managerurl
+   </select>
+   
+   <insert id="addurl" parameterType="com.ml.xx.bean.ManageSysBean">
+   		insert into managerurl (dh,text,url,urltype) values (#{dh},#{text},#{url},#{urltype});
+   </insert>
+   
+   <update id="updateManageSysUrlByDh" parameterType="com.ml.xx.bean.ManageSysBean">
+   		update managerurl set
+   		text=#{text},
+   		url=#{url},
+   		urltype=#{urltype}
+   		where dh = #{dh}
+   </update>
+   
+   <delete id="deleteUrlByDh" parameterType="String">
+   		delete from managerurl where dh = #{dh}
+   </delete>
+   
+   <select id="getManageSysByid" parameterType="String" resultType="com.ml.xx.bean.ManageSysBean">
+   		select * from ManageSys where f_id = #{id}
+   </select>
+   
+   <select id="getAllManageUrl" resultType="com.ml.xx.bean.ManageSysBean">
+   		select * from managerurl where url is not null
+   </select>
+   
+   <update id="editHasChildernByF_id" parameterType="String">
+   		update ManageSys set haschildern = 'true' where id = #{f_id}
+   </update>
+   
+   <insert id="addManageSysUrl" parameterType="com.ml.xx.bean.ManageSysBean">
+   		insert into ManageSys (dh,id,f_id,text,url,urltype,sort) values (#{dh},#{id},#{f_id},#{text},#{url},#{urltype},#{sort})
+   </insert>
+   
+   <update id="updateManageSysByDh" parameterType="com.ml.xx.bean.ManageSysBean">
+   		update ManageSys set 
+   		text = #{text},
+   		url = #{url},
+   		urltype = #{urltype},
+   		sort = #{sort}
+   		where dh = #{dh}
+   </update>
+   
+   <delete id="deleteManageSysByDh" parameterType="String">
+   		delete from ManageSys where dh = #{dh}
+   </delete>
+   
+</mapper>

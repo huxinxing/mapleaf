@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="com.ml.xx.dao.NoteBookMenuDao">
+   
+   <select id="getNoteBookTree" resultType="com.ml.xx.bean.NoteBooKMenuBean">
+   		select * from notebookmenu
+   </select>
+   
+   <select id="getNumByF_id" resultType="int" parameterType="String">
+   		select count(*) from notebookmenu where f_id = #{f_id};
+   </select>
+   
+   <insert id="addNoteBookMenu" parameterType="com.ml.xx.bean.NoteBooKMenuBean">
+   		insert into notebookmenu (id,f_id,text) values (#{id},#{f_id},#{text});
+   </insert>
+   
+   <delete id="deleteNoteBookMenuBeanByid" parameterType="String">
+   		delete from notebookmenu where id = #{id}
+   </delete>
+   
+   <update id="EditNoteBookMMById" parameterType="com.ml.xx.bean.NoteBooKMenuBean">
+   		update notebookmenu set
+   		text = #{text}
+   		where id = #{id}
+   </update>
+   
+   <select id="getNoteBookChildernNodeById" parameterType="String" resultType="com.ml.xx.bean.NoteBookContain">
+   		select * from notebookcontain where id = #{id}
+   </select>
+   
+   <insert id="insertNoteBookContain" parameterType="com.ml.xx.bean.NoteBookContain">
+   		insert into notebookcontain (id,containTitle,timeEdit,containText,containdh) values (#{id},#{containTitle},#{timeEdit},#{containText},#{containdh});
+   </insert>
+   
+   <update id="editNoteBookContain" parameterType="com.ml.xx.bean.NoteBookContain">
+   		update notebookcontain set
+   		id = #{id},
+   		containTitle = #{containTitle},
+   		timeEdit = #{timeEdit},
+   		containText = #{containText}
+   		where containdh = #{containdh}
+   </update>
+   
+   <delete id="deleteNoteBookContain" parameterType="com.ml.xx.bean.NoteBookContain">
+   		delete from notebookcontain where containdh = #{containdh}
+   </delete>
+   
+   <select id="nNBloadNbTextListdgearch" parameterType="com.ml.xx.bean.OthersBean" resultType="com.ml.xx.bean.NoteBookContain">
+   		select * from notebookcontain where id = #{id} and containTitle like CONCAT("%",#{search},"%")
+   </select>
+   
+</mapper>

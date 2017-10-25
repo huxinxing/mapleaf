@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="com.ml.xx.dao.Life_PlanDao">
+   
+   <select id="getLifePlanByTime" parameterType="string" resultType="com.ml.xx.bean.LifePlanBean">
+   		select * from lifeplan where txTime = #{time}
+   </select>
+   
+   <insert id="insertLifePlanBean" parameterType="com.ml.xx.bean.LifePlanBean">
+   		insert into lifeplan 
+   		(lifePlan_dh,title,human,txTime,type_id,yqTime,step_id,descplan,month,day)
+   		values
+   		(#{lifePlan_dh},#{title},#{human},#{txTime},#{type_id},#{yqTime},#{step_id},#{descplan},#{month},#{day})
+   </insert>
+   
+   <update id="updateDealbyLifePlan_dh" parameterType="com.ml.xx.bean.LifePlanBean">
+   		update lifeplan set
+   		deal = #{deal},
+   		yqTime = #{yqTime}
+   		where lifePlan_dh = #{lifePlan_dh}
+   </update>
+   
+   <delete id="deleteLifePlanBeanByLifePlan_dh" parameterType="string">
+   		delete from lifeplan where lifePlan_dh = #{lifePlan_dh}
+   </delete>
+   
+   <select id="getAllLifePlan" resultType="com.ml.xx.bean.LifePlanBean">
+   		select * from lifeplan
+   </select>
+   
+</mapper>

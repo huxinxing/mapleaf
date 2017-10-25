@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="com.ml.xx.dao.Sys_UsernameDao">
+   
+   <select id="getAllUser" resultType="com.ml.xx.bean.SysUsernameBean">
+   		select * from sys_user;
+   </select>
+   
+   <insert id="insertUser" parameterType="com.ml.xx.bean.SysUsernameBean">
+   		insert into sys_user (humanId,username,password,name,sex,age,phone,email,birthday)
+   		values
+   		(#{humanId},#{username},#{password},#{name},#{sex},#{age},#{phone},#{email},#{birthday});
+   </insert>
+   
+   <update id="updateUserByHumanId" parameterType="com.ml.xx.bean.SysUsernameBean">
+   		update sys_user set
+   		username = #{username},
+   		password = #{password},
+   		name = #{name},
+   		sex = #{sex},
+   		age = #{age},
+   		phone = #{phone},
+   		email = #{email},
+   		birthday = #{birthday}
+   		where humanId = #{humanId}
+   </update>
+   
+   <delete id="deleteByHumanId" parameterType="string">
+   		delete from sys_user where humanId = #{humanId}
+   </delete>
+   
+   <select id="getSearchUser" resultType="com.ml.xx.bean.SysUsernameBean">
+   		select * from sys_user where 
+   		username like CONCAT("%",#{searchStr},"%") or 
+   		password like CONCAT("%",#{searchStr},"%") or
+		name like CONCAT("%",#{searchStr},"%") or
+		sex like CONCAT("%",#{searchStr},"%") or
+		age like CONCAT("%",#{searchStr},"%") or
+		phone like CONCAT("%",#{searchStr},"%") or
+		email like CONCAT("%",#{searchStr},"%") or
+		birthday like CONCAT("%",#{searchStr},"%");
+   </select>
+   
+</mapper>

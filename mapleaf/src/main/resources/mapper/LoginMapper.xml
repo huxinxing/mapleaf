@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 命名空间，可以对sql进行分类的一个管理 -->
+<mapper namespace="com.ml.xx.dao.SystemDao">
+   <select id="getAllUsername" resultType="com.ml.xx.bean.LoginBean">
+   		select * from ml_login
+   </select>
+</mapper>
